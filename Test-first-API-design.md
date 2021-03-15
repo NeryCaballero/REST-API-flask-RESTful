@@ -43,5 +43,7 @@ For each request:
     - if the item does not exists, it will create the item.
 5. Delete an item: ```DEL /item/<name>```
     - by unique name, passed on the url.
-    
+
+* All functionalities require authentication token.
+
 It is pretty clear  to see, that 4 out of the 5 functionalities can share the same endpoint using different HTTP request methods.
