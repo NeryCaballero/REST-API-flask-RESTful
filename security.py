@@ -2,7 +2,7 @@ from werkzeug.security import safe_str_cmp
 from user import User
 
 users = [
-    User(1, 'bob', '1234')
+    User(1, 'user', '1234')
 ]
 
 username_mapping = {u.username: u for u in users}
@@ -28,7 +28,7 @@ def identity(payload):
 
 # {'bob': {
 #         'id': 1,
-#         'username': 'bob',
+#         'username': 'nery',
 #         'password': '1234'
 #     }
 # }
@@ -42,7 +42,7 @@ def identity(payload):
 
 # {1: {
 #         'id': 1,
-#         'username': 'bob',
+#         'username': 'nery',
 #         'password': '1234'
 #     }
 # }
