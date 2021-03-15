@@ -71,7 +71,7 @@ Flask comes with the nice library called `werkzeug`, that has a very nice method
 - Import:
 
 ``` py
-from flask_jwt import JWT, jwt_required, current_identity
+from flask_jwt import JWT, jwt_required
 from security import authenticate, identity
 ```
 
@@ -99,9 +99,13 @@ jwt = JWT(app, authenticate, identity)
 * The following request will be sent with the `token`.  
  * `JWT` calls the `identity` function uses the token to get the user's ID. 
 
->>> That's how a user gets **`authenticated`**.
-   
-* Add `@jwt_required` decorator in front of our GET method.
+> ### That's how a user gets **`authenticated`**.
+<br>
+<hr>
+
+
+### To require authentication on HTTP requests:
+* Add `@jwt_required` decorator in front of any method that requires authentication.
 
 ```python
 class Item(Resource):
@@ -116,21 +120,22 @@ class Item(Resource):
 1. Run the app on a local host port 5000.
 2. Request POST : `localhost:5000/auth` 
   - Include the header: `Content-Type : application/json`
-  - Pass on the body the information of an existing `user` in `users` in JSON format.
+  - Pass on the body the information of an existing `user` in `users` in JSON format. In this case:
 ```json
 {
-  "username": "bob",
+  "username": "user",
   "password": "1234"
 }
 ```
-  - It will respond with the `access token`:
+  - It will respond with the `access token` that would look like this:
 ```json
 {
   "access_token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE2MTU3NTc0MjQsImlhdCI6MTYxNTc1NzEyNCwibmJmIjoxNjE1NzU3MTI0LCJpZGVudGl0eSI6MX0.qa6AYlTnMY7THYtBFzSs44H4Jc3uFSLa5vfpw6gQYLY",
 }
 ```
 
-3. Request GET : localhost:5000/item/item1          -- *make sure its been previously created*.
+3. TEST : Request GET : localhost:5000/item  
+- without sending the token you'll get: 
 ```json
 {
     "description": "Request does not contain an access token",
@@ -141,47 +146,30 @@ class Item(Resource):
 
 - Without a token it fails the authentication and the information is not provided.
 
-4. Include the header `Authorization : JWT <insert-the-token-without-the-quotation-marks-here>`
+4. Include the header `Authorization` : `JWT <insert-the-token-without-the-quotation-marks-here>`
 - `JWT` must be capital letters, there must be a `blank space` in between *JWT* and the token.
-- Authentication succeeds and you can access the information.
+- Resent the request.
+- Authentication succeeds and the information its provided.
 
-...
-
-...
-
-...
-
-...
-
-...
-
-...
-
-...
-
-...
-
-...
-
-...
-
-...
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+```json
+{
+    "items": [
+        {
+            "name": "item1",
+            "price": 9.99
+        },
+        {
+            "name": "item2",
+            "price": 99.99
+        },
+        {
+            "name": "item",
+            "price": 999.99
+        }
+    ]
+}
+```
+Note: items is an empty list by default. To add items, sent POST requests.
 
 
 
