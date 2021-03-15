@@ -11,7 +11,7 @@ This API has 2 resources: ```Item``` and ```Items``` created based on [```flask_
 `authentication` has been applied with `flask_jwt`.
 
 The API information is stored in memory database in the form of a list of dictionaries.
-I will be storing data on a database in my [next project]().
+I will be storing data on a `file.db` in my [next project](https://github.com/NeryCaballero/projectFlaskRESTfulSQLite).
 
 The available endpoints are:
 - GET `localhost:5000/items`
